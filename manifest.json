@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "Parempi Taso",
+    "version": "1.0.0",
+    "background": {
+        "service_worker": "service_worker.js",
+        "type": "module"
+    },
+    "action": {
+        "default_popup": "index.html"
+    },
+    "permissions": ["scripting"],
+    "host_permissions": ["https://taso.sjtl.fi/*"],
+    "content_scripts": [
+        {
+            "matches": ["*://taso.sjtl.fi/*"],
+            "js": ["content.js"]
+        }
+    ]
+}
