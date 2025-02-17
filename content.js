@@ -25,23 +25,55 @@ const removeCells = (container) => {
         });
     }
 };
+
 // Remove columns from first ET table
 const tasoETContainer = document.getElementById('taso_et');
 if (tasoETContainer !== null) {
     removeCells(tasoETContainer);
 }
-// Remvoe columsn from second ET table
+
+// Remvoe columns from second ET table
 const sRyhmaETContainer = document.getElementById('sryhma_et');
 if (sRyhmaETContainer !== null) {
     removeCells(sRyhmaETContainer);
 }
 
+// Remove unnecessary open games
+const levels = ['U13', 'U14', 'U15'];
+const ottelulistaContainer = document.getElementById('tuomarinottelut');
+if (ottelulistaContainer !== null) {
+    let container = ottelulistaContainer.querySelector('.ontuomarit');
+    let allRows = container.querySelectorAll('tr');
+
+    allRows.forEach((row) => {
+        const serie = row.cells.length >= 4 && row.cells[3];
+        if (serie)
+            console.log({
+                serie,
+            });
+        if (
+            serie &&
+            !levels.some((sub) => serie.textContent.includes(sub)) &&
+            !row.classList.contains('thrivi')
+        ) {
+            row.style.display = 'none';
+        }
+    });
+}
+
 // Hide not needed tables with charts
-document.getElementById('div_lt').style.display = 'none';
-document.getElementById('div_otv').style.display = 'none';
-document.getElementById('div_vmt').style.display = 'none';
-document.getElementById('div_lt').style.display = 'none';
+const linesmenDiv = document.getElementById('div_lt');
+if (linesmenDiv !== null) linesmenDiv.style.display = 'none';
+const otvDiv = document.getElementById('div_otv');
+if (otvDiv !== null) otvDiv.style.display = 'none';
+const vmtDiv = document.getElementById('div_vmt');
+if (vmtDiv !== null) vmtDiv.style.display = 'none';
+const ltDiv = document.getElementById('div_lt');
+if (ltDiv !== null) ltDiv.style.display = 'none';
 // Hide not needed tables
-document.getElementById('sryhma_lt').style.display = 'none';
-document.getElementById('sryhma_otv').style.display = 'none';
-document.getElementById('sryhma_vmt').style.display = 'none';
+const ltTable = document.getElementById('sryhma_lt');
+if (ltTable !== null) ltTable.style.display = 'none';
+const otvTable = document.getElementById('sryhma_otv');
+if (otvTable !== null) otvTable.style.display = 'none';
+const vmtTable = document.getElementById('sryhma_vmt');
+if (vmtTable !== null) vmtTable.style.display = 'none';
